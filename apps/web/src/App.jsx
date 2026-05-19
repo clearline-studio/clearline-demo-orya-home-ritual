@@ -99,8 +99,8 @@ function App() {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080706]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(255,244,224,0.10),transparent_38%),linear-gradient(135deg,#080706_0%,#11100d_52%,#070605_100%)]" />
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#17100c]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(214,154,92,0.32),transparent_34%),radial-gradient(circle_at_28%_68%,rgba(255,226,185,0.12),transparent_30%),linear-gradient(135deg,#17100c_0%,#2a1b14_46%,#0f0d0b_100%)]" />
           <video
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay
@@ -109,7 +109,7 @@ function App() {
             playsInline
             preload="auto"
             aria-hidden="true"
-            style={{ backgroundColor: '#080706' }}
+            style={{ backgroundColor: '#17100c' }}
           >
             <source src={`${import.meta.env.BASE_URL}Candles_bath.mp4`} type="video/mp4" />
           </video>

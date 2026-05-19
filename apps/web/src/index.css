@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 38 32% 97%;
+    --foreground: 0 0% 10%;
+    
+    --primary: 42 49% 58%;
+    --primary-foreground: 0 0% 10%;
+    
+    --secondary: 6 38% 73%;
+    --secondary-foreground: 0 0% 10%;
+    
+    --accent: 33 24% 44%;
+    --accent-foreground: 38 32% 97%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --muted: 24 8% 63%;
+    --muted-foreground: 0 0% 35%;
+    
+    --card: 40 60% 99%;
+    --card-foreground: 0 0% 10%;
+    
+    --popover: 40 60% 99%;
+    --popover-foreground: 0 0% 10%;
+    
+    --border: 33 16% 89%;
+    --input: 33 16% 89%;
+    --ring: 42 49% 58%;
+    
+    --radius: 0.75rem;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 38 32% 97%;
+    
+    --primary: 42 49% 58%;
+    --primary-foreground: 0 0% 10%;
+    
+    --secondary: 6 38% 40%;
+    --secondary-foreground: 38 32% 97%;
+    
+    --accent: 33 24% 60%;
+    --accent-foreground: 0 0% 10%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 70%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 38 32% 97%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 38 32% 97%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 42 49% 58%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: "DM Sans", sans-serif;
+    overflow-x: clip;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", serif;
+    text-wrap: balance;
+  }
+  
+  p {
+    line-height: 1.625;
+  }
+  
+  * {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 4px 20px rgba(201, 169, 97, 0.08);
+  }
+  
+  .shadow-soft-lg {
+    box-shadow: 0 10px 40px rgba(201, 169, 97, 0.12);
+  }
+}

@@ -7,7 +7,7 @@ import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
 import { getProducts, getProductQuantities } from '@/api/EcommerceApi';
 
-const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzc0MTUxIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzlDQTNBRiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K";
+const placeholderImage = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRTVFN0VCIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJRdWlja3NhbmQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+Cg==";
 
 const ProductCard = ({ product, index }) => {
   const { addToCart } = useCart();
@@ -33,51 +33,67 @@ const ProductCard = ({ product, index }) => {
     try {
       await addToCart(product, defaultVariant, 1, defaultVariant.inventory_quantity);
       toast({
-        title: "Added to Cart! 🛒",
+        title: 'Added to Cart',
         description: `${product.title} has been added to your cart.`,
       });
     } catch (error) {
       toast({
-        title: "Error adding to cart",
+        title: 'Error adding to cart',
         description: error.message,
+        variant: 'destructive'
       });
     }
   }, [product, addToCart, toast, navigate]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+      transition={{ duration: 0.45, delay: index * 0.05 }}
+      className="h-full"
     >
-      <Link to={`/product/${product.id}`}>
-        <div className="rounded-lg border bg-card text-card-foreground shadow-sm glass-card border-0 text-white overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-          <div className="relative">
-            <img
-              src={product.image ||placeholderImage}
-              alt={product.title}
-              className="w-full h-64 object-cover transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
-            {product.ribbon_text && (
-              <div className="absolute top-3 left-3 bg-pink-500/90 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                {product.ribbon_text}
-              </div>
-            )}
-            <div className="absolute top-3 right-3 bg-purple-500/80 text-white text-xs font-bold px-3 py-1 rounded-full flex items-baseline gap-1.5">
-              {hasSale && (
-                <span className="line-through opacity-70">{originalPrice}</span>
-              )}
+      <Link to={`/product/${product.id}`} className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#e9dfce] bg-white shadow-[0_18px_60px_rgba(55,43,30,0.08)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(55,43,30,0.13)]">
+        <div className="relative h-[19rem] overflow-hidden bg-[#efe8dc] sm:h-[21rem] lg:h-[22rem]">
+          <img
+            src={product.image || placeholderImage}
+            alt={product.title}
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/22 via-transparent to-transparent" />
+          {product.ribbon_text && (
+            <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-[#4a3927] shadow-sm backdrop-blur-sm">
+              {product.ribbon_text}
+            </div>
+          )}
+          {hasSale && (
+            <div className="absolute right-4 top-4 rounded-full bg-[#8f4c3b] px-3 py-1.5 text-xs font-bold text-white shadow-sm">
+              Sale
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-1 flex-col p-6">
+          <div className="mb-3 flex items-start justify-between gap-4">
+            <h3 className="line-clamp-2 text-[1.25rem] font-bold leading-tight tracking-[-0.025em] text-[#2f281f] transition-colors group-hover:text-[#9d7b33]">
+              {product.title}
+            </h3>
+            <div className="shrink-0 text-right text-sm font-bold text-[#2f281f]">
+              {hasSale && <span className="block text-xs text-[#8f4c3b] line-through">{originalPrice}</span>}
               <span>{displayPrice}</span>
             </div>
           </div>
-          <div className="p-4">
-            <h3 className="text-lg font-bold truncate">{product.title}</h3>
-            <p className="text-sm text-gray-300 h-10 overflow-hidden">{product.subtitle || 'Check out this amazing product!'}</p>
-            <Button onClick={handleAddToCart} className="w-full mt-4 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold">
-              <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
-            </Button>
-          </div>
+
+          <p className="mb-5 line-clamp-2 text-[0.95rem] leading-6 text-[#6c6256]">
+            {product.subtitle || 'Premium curated ritual piece for home, gifting, and calm daily moments.'}
+          </p>
+
+          <Button
+            onClick={handleAddToCart}
+            variant="outline"
+            className="mt-auto h-11 rounded-full border-[#d8c696] bg-white text-sm font-bold text-[#3a2c1c] hover:border-[#c9a84f] hover:bg-[#c9a84f] hover:text-[#21180f]"
+          >
+            <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+          </Button>
         </div>
       </Link>
     </motion.div>
@@ -94,72 +110,46 @@ const ProductsList = () => {
       try {
         setLoading(true);
         setError(null);
-
         const productsResponse = await getProducts();
-
         if (productsResponse.products.length === 0) {
           setProducts([]);
           return;
         }
-
         const productIds = productsResponse.products.map(product => product.id);
-
-        const quantitiesResponse = await getProductQuantities({
-          fields: 'inventory_quantity',
-          product_ids: productIds
-        });
-
+        const quantitiesResponse = await getProductQuantities({ fields: 'inventory_quantity', product_ids: productIds });
         const variantQuantityMap = new Map();
-        quantitiesResponse.variants.forEach(variant => {
-          variantQuantityMap.set(variant.id, variant.inventory_quantity);
-        });
-
-        const productsWithQuantities = productsResponse.products.map(product => ({
+        quantitiesResponse.variants.forEach(variant => variantQuantityMap.set(variant.id, variant.inventory_quantity));
+        setProducts(productsResponse.products.map(product => ({
           ...product,
           variants: product.variants.map(variant => ({
             ...variant,
             inventory_quantity: variantQuantityMap.get(variant.id) ?? variant.inventory_quantity
           }))
-        }));
-
-        setProducts(productsWithQuantities);
+        })));
       } catch (err) {
         setError(err.message || 'Failed to load products');
       } finally {
         setLoading(false);
       }
     };
-
     fetchProductsWithQuantities();
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="h-16 w-16 text-white animate-spin" />
-      </div>
-    );
+    return <div className="flex h-60 items-center justify-center"><Loader2 className="h-9 w-9 animate-spin text-[#c9a84f]" /></div>;
   }
 
   if (error) {
-    return (
-      <div className="text-center text-red-400 p-8">
-        <p>Error loading products: {error}</p>
-      </div>
-    );
+    return <div className="rounded-2xl bg-[#8f4c3b]/10 p-8 text-center text-[#8f4c3b]">Error loading products: {error}</div>;
   }
 
   if (products.length === 0) {
-    return (
-      <div className="text-center text-gray-400 p-8">
-        <p>No products available at the moment.</p>
-      </div>
-    );
+    return <div className="rounded-2xl bg-white p-10 text-center text-[#6c6256]">No products available at the moment.</div>;
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {products.map((product, index) => (
+    <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-4">
+      {products.slice(0, 8).map((product, index) => (
         <ProductCard key={product.id} product={product} index={index} />
       ))}
     </div>
